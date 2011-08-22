@@ -30,18 +30,18 @@
 		0199F8FE14023C6A0038AA29 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		0199F90014023C6A0038AA29 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0199F90214023C6A0038AA29 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		0199F90614023C6A0038AA29 /* GLImageProcessing-Info.plist */ = {isa = PBXFileReference; path = "GLImageProcessing-Info.plist"; sourceTree = "<group>"; };
+		0199F90614023C6A0038AA29 /* GLImageProcessing-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GLImageProcessing-Info.plist"; sourceTree = "<group>"; };
 		0199F90814023C6B0038AA29 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0199F90A14023C6B0038AA29 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		0199F90C14023C6B0038AA29 /* GLImageProcessing-Prefix.pch */ = {isa = PBXFileReference; path = "GLImageProcessing-Prefix.pch"; sourceTree = "<group>"; };
-		0199F90D14023C6B0038AA29 /* GLImageProcessingAppDelegate.h */ = {isa = PBXFileReference; path = GLImageProcessingAppDelegate.h; sourceTree = "<group>"; };
+		0199F90C14023C6B0038AA29 /* GLImageProcessing-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GLImageProcessing-Prefix.pch"; sourceTree = "<group>"; };
+		0199F90D14023C6B0038AA29 /* GLImageProcessingAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLImageProcessingAppDelegate.h; sourceTree = "<group>"; };
 		0199F90E14023C6B0038AA29 /* GLImageProcessingAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLImageProcessingAppDelegate.m; sourceTree = "<group>"; };
 		0199F91114023C6B0038AA29 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		0199F91314023C6B0038AA29 /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
 		0199F91514023C6B0038AA29 /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
-		0199F91714023C6B0038AA29 /* EAGLView.h */ = {isa = PBXFileReference; path = EAGLView.h; sourceTree = "<group>"; };
+		0199F91714023C6B0038AA29 /* EAGLView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
 		0199F91814023C6B0038AA29 /* EAGLView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
-		0199F91A14023C6B0038AA29 /* GLImageProcessingViewController.h */ = {isa = PBXFileReference; path = GLImageProcessingViewController.h; sourceTree = "<group>"; };
+		0199F91A14023C6B0038AA29 /* GLImageProcessingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLImageProcessingViewController.h; sourceTree = "<group>"; };
 		0199F91B14023C6B0038AA29 /* GLImageProcessingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLImageProcessingViewController.m; sourceTree = "<group>"; };
 		0199F91E14023C6B0038AA29 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/GLImageProcessingViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -97,13 +97,12 @@
 				0199F90D14023C6B0038AA29 /* GLImageProcessingAppDelegate.h */,
 				0199F90E14023C6B0038AA29 /* GLImageProcessingAppDelegate.m */,
 				0199F91014023C6B0038AA29 /* MainWindow.xib */,
-				0199F91314023C6B0038AA29 /* Shader.fsh */,
-				0199F91514023C6B0038AA29 /* Shader.vsh */,
 				0199F91714023C6B0038AA29 /* EAGLView.h */,
 				0199F91814023C6B0038AA29 /* EAGLView.m */,
 				0199F91A14023C6B0038AA29 /* GLImageProcessingViewController.h */,
 				0199F91B14023C6B0038AA29 /* GLImageProcessingViewController.m */,
 				0199F91D14023C6B0038AA29 /* GLImageProcessingViewController.xib */,
+				0199F92514023D4A0038AA29 /* Shaders */,
 				0199F90514023C6A0038AA29 /* Supporting Files */,
 			);
 			path = GLImageProcessing;
@@ -118,6 +117,15 @@
 				0199F90C14023C6B0038AA29 /* GLImageProcessing-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0199F92514023D4A0038AA29 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				0199F91314023C6B0038AA29 /* Shader.fsh */,
+				0199F91514023C6B0038AA29 /* Shader.vsh */,
+			);
+			name = Shaders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,11 +245,12 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -254,12 +263,13 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

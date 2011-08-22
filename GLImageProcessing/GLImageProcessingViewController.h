@@ -15,14 +15,7 @@
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 
-@interface GLImageProcessingViewController : UIViewController {
-    EAGLContext *context;
-    GLuint program;
-    
-    BOOL animating;
-    NSInteger animationFrameInterval;
-    CADisplayLink *displayLink;
-}
+@interface GLImageProcessingViewController : UIViewController
 
 @property (readonly, nonatomic, getter=isAnimating) BOOL animating;
 @property (nonatomic) NSInteger animationFrameInterval;

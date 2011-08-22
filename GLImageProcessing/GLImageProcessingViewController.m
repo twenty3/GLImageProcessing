@@ -26,12 +26,21 @@ enum {
 };
 
 @interface GLImageProcessingViewController ()
-@property (nonatomic, retain) EAGLContext *context;
-@property (nonatomic, assign) CADisplayLink *displayLink;
+{
+    GLuint program;
+    
+    BOOL animating;
+    NSInteger animationFrameInterval;
+}
+
+@property (nonatomic, retain) EAGLContext* context;
+@property (nonatomic, assign) CADisplayLink* displayLink;
+
 - (BOOL)loadShaders;
 - (BOOL)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file;
 - (BOOL)linkProgram:(GLuint)prog;
 - (BOOL)validateProgram:(GLuint)prog;
+
 @end
 
 @implementation GLImageProcessingViewController
@@ -39,6 +48,27 @@ enum {
 @synthesize animating;
 @synthesize context;
 @synthesize displayLink;
+
+#pragma mark - Lifecycle
+
+- (void)dealloc
+{
+    if (program) {
+        glDeleteProgram(program);
+        program = 0;
+    }
+    
+    // Tear down context.
+    if ([EAGLContext currentContext] == context)
+        [EAGLContext setCurrentContext:nil];
+    
+    [context release];
+    
+    [super dealloc];
+}
+
+
+#pragma mark - UINibLoading
 
 - (void)awakeFromNib
 {
@@ -67,22 +97,6 @@ enum {
     self.displayLink = nil;
 }
 
-- (void)dealloc
-{
-    if (program) {
-        glDeleteProgram(program);
-        program = 0;
-    }
-    
-    // Tear down context.
-    if ([EAGLContext currentContext] == context)
-        [EAGLContext setCurrentContext:nil];
-    
-    [context release];
-    
-    [super dealloc];
-}
-
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -109,7 +123,8 @@ enum {
 {
 	[super viewDidUnload];
 	
-    if (program) {
+    if (program)
+    {
         glDeleteProgram(program);
         program = 0;
     }
@@ -186,7 +201,8 @@ enum {
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     
-    if ([context API] == kEAGLRenderingAPIOpenGLES2) {
+    if ([context API] == kEAGLRenderingAPIOpenGLES2)
+    {
         // Use shader program.
         glUseProgram(program);
         

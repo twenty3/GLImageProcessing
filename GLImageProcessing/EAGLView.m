@@ -10,27 +10,36 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-@interface EAGLView (PrivateMethods)
+
+@interface EAGLView ()
+{
+    // The pixel dimensions of the CAEAGLLayer.
+    GLint framebufferWidth;
+    GLint framebufferHeight;
+
+    // The OpenGL ES names for the framebuffer and renderbuffer used to render to this view.
+    GLuint defaultFramebuffer, colorRenderbuffer;
+}
+
 - (void)createFramebuffer;
 - (void)deleteFramebuffer;
+
 @end
 
 @implementation EAGLView
 
+#pragma mark - Synthesize properties
+
 @synthesize context;
 
-// You must implement this method
-+ (Class)layerClass
-{
-    return [CAEAGLLayer class];
-}
+#pragma mark - Lifecycle
 
-//The EAGL view is stored in the nib file. When it's unarchived it's sent -initWithCoder:.
 - (id)initWithCoder:(NSCoder*)coder
 {
     self = [super initWithCoder:coder];
-	if (self) {
-        CAEAGLLayer *eaglLayer = (CAEAGLLayer *)self.layer;
+	if (self)
+    {
+        CAEAGLLayer* eaglLayer = (CAEAGLLayer *)self.layer;
         
         eaglLayer.opaque = TRUE;
         eaglLayer.drawableProperties = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -50,6 +59,21 @@
     [super dealloc];
 }
 
+#pragma mark - UIView
+
++ (Class)layerClass
+{
+    return [CAEAGLLayer class];
+}
+
+- (void)layoutSubviews
+{
+    // The framebuffer will be re-created at the beginning of the next setFramebuffer method call.
+    [self deleteFramebuffer];
+}
+
+#pragma mark - Properties
+
 - (void)setContext:(EAGLContext *)newContext
 {
     if (context != newContext) {
@@ -62,9 +86,12 @@
     }
 }
 
+#pragma mark - Framebuffer
+
 - (void)createFramebuffer
 {
-    if (context && !defaultFramebuffer) {
+    if (context && !defaultFramebuffer)
+    {
         [EAGLContext setCurrentContext:context];
         
         // Create default framebuffer object.
@@ -87,7 +114,8 @@
 
 - (void)deleteFramebuffer
 {
-    if (context) {
+    if (context)
+    {
         [EAGLContext setCurrentContext:context];
         
         if (defaultFramebuffer) {
@@ -104,7 +132,8 @@
 
 - (void)setFramebuffer
 {
-    if (context) {
+    if (context)
+    {
         [EAGLContext setCurrentContext:context];
         
         if (!defaultFramebuffer)
@@ -120,7 +149,8 @@
 {
     BOOL success = FALSE;
     
-    if (context) {
+    if (context)
+    {
         [EAGLContext setCurrentContext:context];
         
         glBindRenderbuffer(GL_RENDERBUFFER, colorRenderbuffer);
@@ -131,10 +161,5 @@
     return success;
 }
 
-- (void)layoutSubviews
-{
-    // The framebuffer will be re-created at the beginning of the next setFramebuffer method call.
-    [self deleteFramebuffer];
-}
 
 @end
