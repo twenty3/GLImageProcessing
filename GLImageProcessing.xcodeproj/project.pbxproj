@@ -1,0 +1,315 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0199F8FB14023C6A0038AA29 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0199F8FA14023C6A0038AA29 /* UIKit.framework */; };
+		0199F8FD14023C6A0038AA29 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0199F8FC14023C6A0038AA29 /* Foundation.framework */; };
+		0199F8FF14023C6A0038AA29 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0199F8FE14023C6A0038AA29 /* CoreGraphics.framework */; };
+		0199F90114023C6A0038AA29 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0199F90014023C6A0038AA29 /* QuartzCore.framework */; };
+		0199F90314023C6A0038AA29 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0199F90214023C6A0038AA29 /* OpenGLES.framework */; };
+		0199F90914023C6B0038AA29 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0199F90714023C6B0038AA29 /* InfoPlist.strings */; };
+		0199F90B14023C6B0038AA29 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0199F90A14023C6B0038AA29 /* main.m */; };
+		0199F90F14023C6B0038AA29 /* GLImageProcessingAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0199F90E14023C6B0038AA29 /* GLImageProcessingAppDelegate.m */; };
+		0199F91214023C6B0038AA29 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0199F91014023C6B0038AA29 /* MainWindow.xib */; };
+		0199F91414023C6B0038AA29 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0199F91314023C6B0038AA29 /* Shader.fsh */; };
+		0199F91614023C6B0038AA29 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 0199F91514023C6B0038AA29 /* Shader.vsh */; };
+		0199F91914023C6B0038AA29 /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0199F91814023C6B0038AA29 /* EAGLView.m */; };
+		0199F91C14023C6B0038AA29 /* GLImageProcessingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0199F91B14023C6B0038AA29 /* GLImageProcessingViewController.m */; };
+		0199F91F14023C6B0038AA29 /* GLImageProcessingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0199F91D14023C6B0038AA29 /* GLImageProcessingViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0199F8F614023C6A0038AA29 /* GLImageProcessing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GLImageProcessing.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0199F8FA14023C6A0038AA29 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		0199F8FC14023C6A0038AA29 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0199F8FE14023C6A0038AA29 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		0199F90014023C6A0038AA29 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		0199F90214023C6A0038AA29 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		0199F90614023C6A0038AA29 /* GLImageProcessing-Info.plist */ = {isa = PBXFileReference; path = "GLImageProcessing-Info.plist"; sourceTree = "<group>"; };
+		0199F90814023C6B0038AA29 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0199F90A14023C6B0038AA29 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0199F90C14023C6B0038AA29 /* GLImageProcessing-Prefix.pch */ = {isa = PBXFileReference; path = "GLImageProcessing-Prefix.pch"; sourceTree = "<group>"; };
+		0199F90D14023C6B0038AA29 /* GLImageProcessingAppDelegate.h */ = {isa = PBXFileReference; path = GLImageProcessingAppDelegate.h; sourceTree = "<group>"; };
+		0199F90E14023C6B0038AA29 /* GLImageProcessingAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLImageProcessingAppDelegate.m; sourceTree = "<group>"; };
+		0199F91114023C6B0038AA29 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		0199F91314023C6B0038AA29 /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
+		0199F91514023C6B0038AA29 /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
+		0199F91714023C6B0038AA29 /* EAGLView.h */ = {isa = PBXFileReference; path = EAGLView.h; sourceTree = "<group>"; };
+		0199F91814023C6B0038AA29 /* EAGLView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
+		0199F91A14023C6B0038AA29 /* GLImageProcessingViewController.h */ = {isa = PBXFileReference; path = GLImageProcessingViewController.h; sourceTree = "<group>"; };
+		0199F91B14023C6B0038AA29 /* GLImageProcessingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLImageProcessingViewController.m; sourceTree = "<group>"; };
+		0199F91E14023C6B0038AA29 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/GLImageProcessingViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0199F8F314023C6A0038AA29 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0199F8FB14023C6A0038AA29 /* UIKit.framework in Frameworks */,
+				0199F8FD14023C6A0038AA29 /* Foundation.framework in Frameworks */,
+				0199F8FF14023C6A0038AA29 /* CoreGraphics.framework in Frameworks */,
+				0199F90114023C6A0038AA29 /* QuartzCore.framework in Frameworks */,
+				0199F90314023C6A0038AA29 /* OpenGLES.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0199F8EB14023C6A0038AA29 = {
+			isa = PBXGroup;
+			children = (
+				0199F90414023C6A0038AA29 /* GLImageProcessing */,
+				0199F8F914023C6A0038AA29 /* Frameworks */,
+				0199F8F714023C6A0038AA29 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0199F8F714023C6A0038AA29 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0199F8F614023C6A0038AA29 /* GLImageProcessing.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0199F8F914023C6A0038AA29 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0199F8FA14023C6A0038AA29 /* UIKit.framework */,
+				0199F8FC14023C6A0038AA29 /* Foundation.framework */,
+				0199F8FE14023C6A0038AA29 /* CoreGraphics.framework */,
+				0199F90014023C6A0038AA29 /* QuartzCore.framework */,
+				0199F90214023C6A0038AA29 /* OpenGLES.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0199F90414023C6A0038AA29 /* GLImageProcessing */ = {
+			isa = PBXGroup;
+			children = (
+				0199F90D14023C6B0038AA29 /* GLImageProcessingAppDelegate.h */,
+				0199F90E14023C6B0038AA29 /* GLImageProcessingAppDelegate.m */,
+				0199F91014023C6B0038AA29 /* MainWindow.xib */,
+				0199F91314023C6B0038AA29 /* Shader.fsh */,
+				0199F91514023C6B0038AA29 /* Shader.vsh */,
+				0199F91714023C6B0038AA29 /* EAGLView.h */,
+				0199F91814023C6B0038AA29 /* EAGLView.m */,
+				0199F91A14023C6B0038AA29 /* GLImageProcessingViewController.h */,
+				0199F91B14023C6B0038AA29 /* GLImageProcessingViewController.m */,
+				0199F91D14023C6B0038AA29 /* GLImageProcessingViewController.xib */,
+				0199F90514023C6A0038AA29 /* Supporting Files */,
+			);
+			path = GLImageProcessing;
+			sourceTree = "<group>";
+		};
+		0199F90514023C6A0038AA29 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0199F90614023C6A0038AA29 /* GLImageProcessing-Info.plist */,
+				0199F90714023C6B0038AA29 /* InfoPlist.strings */,
+				0199F90A14023C6B0038AA29 /* main.m */,
+				0199F90C14023C6B0038AA29 /* GLImageProcessing-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0199F8F514023C6A0038AA29 /* GLImageProcessing */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0199F92214023C6B0038AA29 /* Build configuration list for PBXNativeTarget "GLImageProcessing" */;
+			buildPhases = (
+				0199F8F214023C6A0038AA29 /* Sources */,
+				0199F8F314023C6A0038AA29 /* Frameworks */,
+				0199F8F414023C6A0038AA29 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GLImageProcessing;
+			productName = GLImageProcessing;
+			productReference = 0199F8F614023C6A0038AA29 /* GLImageProcessing.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0199F8ED14023C6A0038AA29 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Aged & Distilled";
+			};
+			buildConfigurationList = 0199F8F014023C6A0038AA29 /* Build configuration list for PBXProject "GLImageProcessing" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0199F8EB14023C6A0038AA29;
+			productRefGroup = 0199F8F714023C6A0038AA29 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0199F8F514023C6A0038AA29 /* GLImageProcessing */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0199F8F414023C6A0038AA29 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0199F90914023C6B0038AA29 /* InfoPlist.strings in Resources */,
+				0199F91214023C6B0038AA29 /* MainWindow.xib in Resources */,
+				0199F91414023C6B0038AA29 /* Shader.fsh in Resources */,
+				0199F91614023C6B0038AA29 /* Shader.vsh in Resources */,
+				0199F91F14023C6B0038AA29 /* GLImageProcessingViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0199F8F214023C6A0038AA29 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0199F90B14023C6B0038AA29 /* main.m in Sources */,
+				0199F90F14023C6B0038AA29 /* GLImageProcessingAppDelegate.m in Sources */,
+				0199F91914023C6B0038AA29 /* EAGLView.m in Sources */,
+				0199F91C14023C6B0038AA29 /* GLImageProcessingViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		0199F90714023C6B0038AA29 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0199F90814023C6B0038AA29 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		0199F91014023C6B0038AA29 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0199F91114023C6B0038AA29 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		0199F91D14023C6B0038AA29 /* GLImageProcessingViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0199F91E14023C6B0038AA29 /* en */,
+			);
+			name = GLImageProcessingViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0199F92014023C6B0038AA29 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		0199F92114023C6B0038AA29 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0199F92314023C6B0038AA29 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GLImageProcessing/GLImageProcessing-Prefix.pch";
+				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				INFOPLIST_FILE = "GLImageProcessing/GLImageProcessing-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		0199F92414023C6B0038AA29 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GLImageProcessing/GLImageProcessing-Prefix.pch";
+				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				INFOPLIST_FILE = "GLImageProcessing/GLImageProcessing-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0199F8F014023C6A0038AA29 /* Build configuration list for PBXProject "GLImageProcessing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0199F92014023C6B0038AA29 /* Debug */,
+				0199F92114023C6B0038AA29 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0199F92214023C6B0038AA29 /* Build configuration list for PBXNativeTarget "GLImageProcessing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0199F92314023C6B0038AA29 /* Debug */,
+				0199F92414023C6B0038AA29 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0199F8ED14023C6A0038AA29 /* Project object */;
+}
