@@ -11,13 +11,6 @@
 #import "GLImageProcessingViewController.h"
 #import "EAGLView.h"
 
-// Uniform index.
-enum {
-    UNIFORM_TRANSLATE,
-    NUM_UNIFORMS
-};
-GLint uniforms[NUM_UNIFORMS];
-
 // Attribute index.
 enum {
     ATTRIB_VERTEX,
@@ -129,18 +122,12 @@ enum {
         0,     0,   0,   0,
         255,   0, 255, 255,
     };
-    
-    static float transY = 0.0f;
-    
+        
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     
     // Use shader program.
     glUseProgram(program);
-    
-    // Update uniform value.
-    glUniform1f(uniforms[UNIFORM_TRANSLATE], (GLfloat)transY);
-    transY += 0.075f;	
     
     // Update attribute values.
     glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, 0, 0, squareVertices);
@@ -308,9 +295,6 @@ enum {
         
         return FALSE;
     }
-    
-    // Get uniform locations.
-    uniforms[UNIFORM_TRANSLATE] = glGetUniformLocation(program, "translate");
     
     // Release vertex and fragment shaders.
     if (vertShader)
