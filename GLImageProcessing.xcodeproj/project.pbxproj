@@ -154,6 +154,7 @@
 		0199F8ED14023C6A0038AA29 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = "Aged & Distilled";
 			};
 			buildConfigurationList = 0199F8F014023C6A0038AA29 /* Build configuration list for PBXProject "GLImageProcessing" */;
@@ -318,6 +319,7 @@
 				0199F92414023C6B0038AA29 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

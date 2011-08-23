@@ -76,7 +76,8 @@
 
 - (void)setContext:(EAGLContext *)newContext
 {
-    if (context != newContext) {
+    if (context != newContext)
+    {
         [self deleteFramebuffer];
         
         [context release];
@@ -118,12 +119,14 @@
     {
         [EAGLContext setCurrentContext:context];
         
-        if (defaultFramebuffer) {
+        if (defaultFramebuffer)
+        {
             glDeleteFramebuffers(1, &defaultFramebuffer);
             defaultFramebuffer = 0;
         }
         
-        if (colorRenderbuffer) {
+        if (colorRenderbuffer)
+        {
             glDeleteRenderbuffers(1, &colorRenderbuffer);
             colorRenderbuffer = 0;
         }
