@@ -18,7 +18,8 @@
     GLint framebufferHeight;
 
     // The OpenGL ES names for the framebuffer and renderbuffer used to render to this view.
-    GLuint defaultFramebuffer, colorRenderbuffer;
+    GLuint defaultFramebuffer;
+    GLuint colorRenderbuffer;
 }
 
 - (void)createFramebuffer;
@@ -30,7 +31,7 @@
 
 #pragma mark - Synthesize properties
 
-@synthesize context;
+@synthesize context = context_;
 
 #pragma mark - Lifecycle
 
@@ -54,7 +55,7 @@
 - (void)dealloc
 {
     [self deleteFramebuffer];    
-    [context release];
+    [context_ release];
     
     [super dealloc];
 }
@@ -76,12 +77,11 @@
 
 - (void)setContext:(EAGLContext *)newContext
 {
-    if (context != newContext)
+    if (context_ != newContext)
     {
         [self deleteFramebuffer];
-        
-        [context release];
-        context = [newContext retain];
+        [context_ release];
+        context_ = [newContext retain];;
         
         [EAGLContext setCurrentContext:nil];
     }
@@ -91,9 +91,9 @@
 
 - (void)createFramebuffer
 {
-    if (context && !defaultFramebuffer)
+    if (self.context && !defaultFramebuffer)
     {
-        [EAGLContext setCurrentContext:context];
+        [EAGLContext setCurrentContext:self.context];
         
         // Create default framebuffer object.
         glGenFramebuffers(1, &defaultFramebuffer);
@@ -102,7 +102,7 @@
         // Create color render buffer and allocate backing store.
         glGenRenderbuffers(1, &colorRenderbuffer);
         glBindRenderbuffer(GL_RENDERBUFFER, colorRenderbuffer);
-        [context renderbufferStorage:GL_RENDERBUFFER fromDrawable:(CAEAGLLayer *)self.layer];
+        [self.context renderbufferStorage:GL_RENDERBUFFER fromDrawable:(CAEAGLLayer *)self.layer];
         glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &framebufferWidth);
         glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &framebufferHeight);
         
@@ -115,9 +115,9 @@
 
 - (void)deleteFramebuffer
 {
-    if (context)
+    if (self.context)
     {
-        [EAGLContext setCurrentContext:context];
+        [EAGLContext setCurrentContext:self.context];
         
         if (defaultFramebuffer)
         {
@@ -135,9 +135,9 @@
 
 - (void)setFramebuffer
 {
-    if (context)
+    if (self.context)
     {
-        [EAGLContext setCurrentContext:context];
+        [EAGLContext setCurrentContext:self.context];
         
         if (!defaultFramebuffer)
             [self createFramebuffer];
@@ -152,13 +152,13 @@
 {
     BOOL success = FALSE;
     
-    if (context)
+    if (self.context)
     {
-        [EAGLContext setCurrentContext:context];
+        [EAGLContext setCurrentContext:self.context];
         
         glBindRenderbuffer(GL_RENDERBUFFER, colorRenderbuffer);
         
-        success = [context presentRenderbuffer:GL_RENDERBUFFER];
+        success = [self.context presentRenderbuffer:GL_RENDERBUFFER];
     }
     
     return success;

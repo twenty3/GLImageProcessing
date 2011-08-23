@@ -28,13 +28,11 @@ enum {
 @interface GLImageProcessingViewController ()
 {
     GLuint program;
-    
-    BOOL animating;
-    NSInteger animationFrameInterval;
 }
 
 @property (nonatomic, retain) EAGLContext* context;
-@property (nonatomic, assign) CADisplayLink* displayLink;
+
+- (void)drawFrame;
 
 - (BOOL)loadShaders;
 - (BOOL)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file;
@@ -45,9 +43,7 @@ enum {
 
 @implementation GLImageProcessingViewController
 
-@synthesize animating = animating_;
 @synthesize context = context_;
-@synthesize displayLink = displayLink_;
 
 #pragma mark - Lifecycle
 
@@ -87,33 +83,10 @@ enum {
     
     if ([self.context API] == kEAGLRenderingAPIOpenGLES2)
         [self loadShaders];
-    
-    animating = FALSE;
-    animationFrameInterval = 1;
-    self.displayLink = nil;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc. that aren't in use.
-}
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [self startAnimation];
-    
-    [super viewWillAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [self stopAnimation];
-    
-    [super viewWillDisappear:animated];
-}
+#pragma mark - UIViewController
 
 - (void)viewDidUnload
 {
@@ -131,53 +104,18 @@ enum {
 	self.context = nil;	
 }
 
-- (NSInteger)animationFrameInterval
+- (void)viewDidAppear:(BOOL)animated
 {
-    return animationFrameInterval;
+    [self drawFrame];
 }
 
-- (void)setAnimationFrameInterval:(NSInteger)frameInterval
-{
-    /*
-	 Frame interval defines how many display frames must pass between each time the display link fires.
-	 The display link will only fire 30 times a second when the frame internal is two on a display that refreshes 60 times a second. The default frame interval setting of one will fire 60 times a second when the display refreshes at 60 times a second. A frame interval setting of less than one results in undefined behavior.
-	 */
-    if (frameInterval >= 1) {
-        animationFrameInterval = frameInterval;
-        
-        if (animating) {
-            [self stopAnimation];
-            [self startAnimation];
-        }
-    }
-}
 
-- (void)startAnimation
-{
-    if (!animating) {
-        CADisplayLink *aDisplayLink = [[UIScreen mainScreen] displayLinkWithTarget:self selector:@selector(drawFrame)];
-        [aDisplayLink setFrameInterval:animationFrameInterval];
-        [aDisplayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-        self.displayLink = aDisplayLink;
-        
-        animating = TRUE;
-    }
-}
-
-- (void)stopAnimation
-{
-    if (animating) {
-        [self.displayLink invalidate];
-        self.displayLink = nil;
-        animating = FALSE;
-    }
-}
+#pragma mark - Draw
 
 - (void)drawFrame
 {
     [(EAGLView *)self.view setFramebuffer];
     
-    // Replace the implementation of this method to do your own custom drawing.
     static const GLfloat squareVertices[] = {
         -0.5f, -0.33f,
         0.5f, -0.33f,
@@ -197,7 +135,6 @@ enum {
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     
-    
     // Use shader program.
     glUseProgram(program);
     
@@ -214,7 +151,8 @@ enum {
     // Validate program before drawing. This is a good check, but only really necessary in a debug build.
     // DEBUG macro must be defined in your debug configurations if that's not already the case.
 #if defined(DEBUG)
-    if (![self validateProgram:program]) {
+    if (![self validateProgram:program])
+    {
         NSLog(@"Failed to validate program: %d", program);
         return;
     }
@@ -224,6 +162,9 @@ enum {
     
     [(EAGLView *)self.view presentFramebuffer];
 }
+
+
+#pragma mark - Shaders
 
 - (BOOL)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file
 {
