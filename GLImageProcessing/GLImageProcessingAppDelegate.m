@@ -10,7 +10,7 @@
 
 #import "EAGLView.h"
 
-#import "GLImageProcessingViewController.h"
+#import "ImageProcessingViewController.h"
 
 @implementation GLImageProcessingAppDelegate
 

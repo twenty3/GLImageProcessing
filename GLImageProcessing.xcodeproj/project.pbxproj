@@ -19,8 +19,8 @@
 		0199F91414023C6B0038AA29 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0199F91314023C6B0038AA29 /* Shader.fsh */; };
 		0199F91614023C6B0038AA29 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 0199F91514023C6B0038AA29 /* Shader.vsh */; };
 		0199F91914023C6B0038AA29 /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0199F91814023C6B0038AA29 /* EAGLView.m */; };
-		0199F91C14023C6B0038AA29 /* GLImageProcessingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0199F91B14023C6B0038AA29 /* GLImageProcessingViewController.m */; };
-		0199F91F14023C6B0038AA29 /* GLImageProcessingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0199F91D14023C6B0038AA29 /* GLImageProcessingViewController.xib */; };
+		0199F91C14023C6B0038AA29 /* ImageProcessingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0199F91B14023C6B0038AA29 /* ImageProcessingViewController.m */; };
+		0199F91F14023C6B0038AA29 /* ImageProcessingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0199F91D14023C6B0038AA29 /* ImageProcessingViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,9 +41,9 @@
 		0199F91514023C6B0038AA29 /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
 		0199F91714023C6B0038AA29 /* EAGLView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
 		0199F91814023C6B0038AA29 /* EAGLView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
-		0199F91A14023C6B0038AA29 /* GLImageProcessingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLImageProcessingViewController.h; sourceTree = "<group>"; };
-		0199F91B14023C6B0038AA29 /* GLImageProcessingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLImageProcessingViewController.m; sourceTree = "<group>"; };
-		0199F91E14023C6B0038AA29 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/GLImageProcessingViewController.xib; sourceTree = "<group>"; };
+		0199F91A14023C6B0038AA29 /* ImageProcessingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageProcessingViewController.h; sourceTree = "<group>"; };
+		0199F91B14023C6B0038AA29 /* ImageProcessingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageProcessingViewController.m; sourceTree = "<group>"; };
+		0199F91E14023C6B0038AA29 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ImageProcessingViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,9 +99,9 @@
 				0199F91014023C6B0038AA29 /* MainWindow.xib */,
 				0199F91714023C6B0038AA29 /* EAGLView.h */,
 				0199F91814023C6B0038AA29 /* EAGLView.m */,
-				0199F91A14023C6B0038AA29 /* GLImageProcessingViewController.h */,
-				0199F91B14023C6B0038AA29 /* GLImageProcessingViewController.m */,
-				0199F91D14023C6B0038AA29 /* GLImageProcessingViewController.xib */,
+				0199F91A14023C6B0038AA29 /* ImageProcessingViewController.h */,
+				0199F91B14023C6B0038AA29 /* ImageProcessingViewController.m */,
+				0199F91D14023C6B0038AA29 /* ImageProcessingViewController.xib */,
 				0199F92514023D4A0038AA29 /* Shaders */,
 				0199F90514023C6A0038AA29 /* Supporting Files */,
 			);
@@ -183,7 +183,7 @@
 				0199F91214023C6B0038AA29 /* MainWindow.xib in Resources */,
 				0199F91414023C6B0038AA29 /* Shader.fsh in Resources */,
 				0199F91614023C6B0038AA29 /* Shader.vsh in Resources */,
-				0199F91F14023C6B0038AA29 /* GLImageProcessingViewController.xib in Resources */,
+				0199F91F14023C6B0038AA29 /* ImageProcessingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,7 +197,7 @@
 				0199F90B14023C6B0038AA29 /* main.m in Sources */,
 				0199F90F14023C6B0038AA29 /* GLImageProcessingAppDelegate.m in Sources */,
 				0199F91914023C6B0038AA29 /* EAGLView.m in Sources */,
-				0199F91C14023C6B0038AA29 /* GLImageProcessingViewController.m in Sources */,
+				0199F91C14023C6B0038AA29 /* ImageProcessingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,12 +220,12 @@
 			name = MainWindow.xib;
 			sourceTree = "<group>";
 		};
-		0199F91D14023C6B0038AA29 /* GLImageProcessingViewController.xib */ = {
+		0199F91D14023C6B0038AA29 /* ImageProcessingViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				0199F91E14023C6B0038AA29 /* en */,
 			);
-			name = GLImageProcessingViewController.xib;
+			name = ImageProcessingViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

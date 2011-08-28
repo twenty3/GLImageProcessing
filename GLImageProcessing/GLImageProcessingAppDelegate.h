@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class GLImageProcessingViewController;
+@class ImageProcessingViewController;
 
 @interface GLImageProcessingAppDelegate : NSObject <UIApplicationDelegate>
 
 @property (nonatomic, retain) IBOutlet UIWindow* window;
-@property (nonatomic, retain) IBOutlet GLImageProcessingViewController* viewController;
+@property (nonatomic, retain) IBOutlet ImageProcessingViewController* viewController;
 
 @end
