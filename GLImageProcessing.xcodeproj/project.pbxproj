@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		012ABFED140B187B002A801F /* GLTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 012ABFEC140B187B002A801F /* GLTexture.m */; };
 		0199F8FB14023C6A0038AA29 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0199F8FA14023C6A0038AA29 /* UIKit.framework */; };
 		0199F8FD14023C6A0038AA29 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0199F8FC14023C6A0038AA29 /* Foundation.framework */; };
 		0199F8FF14023C6A0038AA29 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0199F8FE14023C6A0038AA29 /* CoreGraphics.framework */; };
@@ -24,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		012ABFEB140B187B002A801F /* GLTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLTexture.h; sourceTree = "<group>"; };
+		012ABFEC140B187B002A801F /* GLTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLTexture.m; sourceTree = "<group>"; };
 		0199F8F614023C6A0038AA29 /* GLImageProcessing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GLImageProcessing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0199F8FA14023C6A0038AA29 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0199F8FC14023C6A0038AA29 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -91,6 +94,15 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		012AC004140B6EF6002A801F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				012ABFEB140B187B002A801F /* GLTexture.h */,
+				012ABFEC140B187B002A801F /* GLTexture.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		0199F8EB14023C6A0038AA29 = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +138,7 @@
 				012ABFDF140AFFE4002A801F /* Application */,
 				012ABFE0140AFFF2002A801F /* Controllers */,
 				012ABFE1140B0007002A801F /* Views */,
+				012AC004140B6EF6002A801F /* Model */,
 				0199F92514023D4A0038AA29 /* Shaders */,
 				0199F90514023C6A0038AA29 /* Supporting Files */,
 			);
@@ -222,6 +235,7 @@
 				0199F90F14023C6B0038AA29 /* GLImageProcessingAppDelegate.m in Sources */,
 				0199F91914023C6B0038AA29 /* EAGLView.m in Sources */,
 				0199F91C14023C6B0038AA29 /* ImageProcessingViewController.m in Sources */,
+				012ABFED140B187B002A801F /* GLTexture.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
