@@ -107,8 +107,11 @@ enum {
 
 - (void)drawFrame
 {
+    // This makes the context and framebuffer associated with our view current. GL State and drawing commands will be targeted to that context and render in that framebuffer
     [(EAGLView *)self.view setFramebuffer];
     
+    // Here we declare a set of vertices that define a square that is paralell to the viewing plane.
+    // These are effectively normalized device viewing space coordinates because we are not manipulating the modelview or projection transformations from their defaults and we have set up the viewport to match the size of our view
     static const GLfloat squareVertices[] = {
         -0.5f, -0.33f,
         0.5f, -0.33f,
@@ -116,6 +119,7 @@ enum {
         0.5f,  0.33f,
     };
     
+    // Here we declare an RGBA color for each vertex. Our shaders will interpolate these across the face of the square.
     static const GLubyte squareColors[] = {
         255, 255,   0, 255,
         0,   255, 255, 255,
@@ -145,8 +149,10 @@ enum {
     }
 #endif
     
+    // This causes GL to draw our scene with the current state- including the vertices and color attributes we have supplied to the state above. The drawing is raterized into the current framebuffer
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     
+    // This casues the OS to display the rasterized scene 
     [(EAGLView *)self.view presentFramebuffer];
 }
 

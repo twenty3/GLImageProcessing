@@ -62,6 +62,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		012ABFDF140AFFE4002A801F /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				0199F90D14023C6B0038AA29 /* GLImageProcessingAppDelegate.h */,
+				0199F90E14023C6B0038AA29 /* GLImageProcessingAppDelegate.m */,
+				0199F91014023C6B0038AA29 /* MainWindow.xib */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		012ABFE0140AFFF2002A801F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0199F91A14023C6B0038AA29 /* ImageProcessingViewController.h */,
+				0199F91B14023C6B0038AA29 /* ImageProcessingViewController.m */,
+				0199F91D14023C6B0038AA29 /* ImageProcessingViewController.xib */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		012ABFE1140B0007002A801F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0199F91714023C6B0038AA29 /* EAGLView.h */,
+				0199F91814023C6B0038AA29 /* EAGLView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		0199F8EB14023C6A0038AA29 = {
 			isa = PBXGroup;
 			children = (
@@ -94,14 +123,9 @@
 		0199F90414023C6A0038AA29 /* GLImageProcessing */ = {
 			isa = PBXGroup;
 			children = (
-				0199F90D14023C6B0038AA29 /* GLImageProcessingAppDelegate.h */,
-				0199F90E14023C6B0038AA29 /* GLImageProcessingAppDelegate.m */,
-				0199F91014023C6B0038AA29 /* MainWindow.xib */,
-				0199F91714023C6B0038AA29 /* EAGLView.h */,
-				0199F91814023C6B0038AA29 /* EAGLView.m */,
-				0199F91A14023C6B0038AA29 /* ImageProcessingViewController.h */,
-				0199F91B14023C6B0038AA29 /* ImageProcessingViewController.m */,
-				0199F91D14023C6B0038AA29 /* ImageProcessingViewController.xib */,
+				012ABFDF140AFFE4002A801F /* Application */,
+				012ABFE0140AFFF2002A801F /* Controllers */,
+				012ABFE1140B0007002A801F /* Views */,
 				0199F92514023D4A0038AA29 /* Shaders */,
 				0199F90514023C6A0038AA29 /* Supporting Files */,
 			);
