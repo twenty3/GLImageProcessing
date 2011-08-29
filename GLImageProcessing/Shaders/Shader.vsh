@@ -10,13 +10,12 @@ attribute vec4 position;
     // This attribute comes from the client application
     // represents the location of each vertex to render
 
-attribute vec4 color;
-    // This attribute comes from the client application 
-    // represents the color at each vertex
+attribute vec2 textureCoordinate;
+    // This attribute comes from the client application
+    // represents teh texture coordinates to use for this vertex
 
-varying vec4 colorVarying;
-    // This varying variable is visible to the fragment shader
-    // It will be interpolated between vertices when accessed for a specific fragment in the fragment shader
+varying vec2 interpolatedTextureCoordinate;
+    // This varible is interpolated for each fragment from the contributing vertices
 
 void main()
 {
@@ -26,5 +25,5 @@ void main()
     gl_Position = position;
     
     // make the color attribute the client set for this vertex available to the fragment shader
-    colorVarying = color;
+    interpolatedTextureCoordinate = textureCoordinate;
 }

@@ -12,12 +12,26 @@
 #import "EAGLView.h"
 #import "GLTexture.h"
 
-// Attribute index.
+#pragma mark Enumerations
+
+// Attributes
 enum {
     ATTRIB_VERTEX,
-    ATTRIB_COLOR,
+    ATTRIB_TEXTURE_COORDINATES,
     NUM_ATTRIBUTES
 };
+
+// Uniforms
+enum {
+    UNIFORM_SOURCE_TEXTURE,
+    NUM_UNIFORMS
+};
+
+#pragma mark - Statics
+
+static GLint uniforms[NUM_UNIFORMS];
+
+#pragma mark -
 
 @interface ImageProcessingViewController ()
 {
@@ -56,6 +70,7 @@ enum {
         [EAGLContext setCurrentContext:nil];
     
     [context_ release];
+    [sourceImage_ release];
     
     [super dealloc];
 }
@@ -117,19 +132,22 @@ enum {
     
     // Here we declare a set of vertices that define a square that is paralell to the viewing plane.
     // These are effectively normalized device viewing space coordinates because we are not manipulating the modelview or projection transformations from their defaults and we have set up the viewport to match the size of our view
-    static const GLfloat squareVertices[] = {
-        -0.5f, -0.33f,
-        0.5f, -0.33f,
-        -0.5f,  0.33f,
-        0.5f,  0.33f,
+    static const GLfloat squareVertices[] =
+    {
+        -1.0f, -1.0f,
+         1.0f, -1.0f,
+        -1.0f,  1.0f,
+         1.0f,  1.0f,
     };
     
-    // Here we declare an RGBA color for each vertex. Our shaders will interpolate these across the face of the square.
-    static const GLubyte squareColors[] = {
-        255, 255,   0, 255,
-        0,   255, 255, 255,
-        0,     0,   0,   0,
-        255,   0, 255, 255,
+    // Here we declare an texture coordinates that map the source texture to the quad defined above. We simply place each corner of the source image on a corner of the quad.
+    
+    static const GLfloat textureCoordinates[] =
+    {
+        0.0f, 1.0f,
+        1.0f, 1.0f,
+        0.0f, 0.0f,
+        1.0f, 0.0f,
     };
         
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
@@ -141,8 +159,12 @@ enum {
     // Update attribute values.
     glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, 0, 0, squareVertices);
     glEnableVertexAttribArray(ATTRIB_VERTEX);
-    glVertexAttribPointer(ATTRIB_COLOR, 4, GL_UNSIGNED_BYTE, 1, 0, squareColors);
-    glEnableVertexAttribArray(ATTRIB_COLOR);
+    glVertexAttribPointer(ATTRIB_TEXTURE_COORDINATES, 2, GL_FLOAT, 0, 0, textureCoordinates);
+    glEnableVertexAttribArray(ATTRIB_TEXTURE_COORDINATES);
+    
+    // Bind the source texture to a texture unit and set the source sampler for the shader to that texture unit
+    [self.sourceImage bindToTextureUnit:GL_TEXTURE0];
+    glUniform1i(uniforms[UNIFORM_SOURCE_TEXTURE], 0);
     
     // Validate program before drawing. This is a good check, but only really necessary in a debug build.
     // DEBUG macro must be defined in your debug configurations if that's not already the case.
@@ -154,7 +176,7 @@ enum {
     }
 #endif
     
-    // This causes GL to draw our scene with the current state- including the vertices and color attributes we have supplied to the state above. The drawing is raterized into the current framebuffer
+    // This causes GL to draw our scene with the current state- including the vertices and texture coordinate attributes we have supplied to the state above. The drawing is raterized into the current framebuffer
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     
     // This casues the OS to display the rasterized scene 
@@ -281,7 +303,7 @@ enum {
     // Bind attribute locations.
     // This needs to be done prior to linking.
     glBindAttribLocation(program, ATTRIB_VERTEX, "position");
-    glBindAttribLocation(program, ATTRIB_COLOR, "color");
+    glBindAttribLocation(program, ATTRIB_TEXTURE_COORDINATES, "textureCoordinate");
     
     // Link program.
     if (![self linkProgram:program])
@@ -307,6 +329,9 @@ enum {
         return FALSE;
     }
     
+    // Get Uniform locations from the linked programs
+    uniforms[UNIFORM_SOURCE_TEXTURE] = glGetUniformLocation(program, "sourceTexture");
+
     // Release vertex and fragment shaders.
     if (vertShader)
         glDeleteShader(vertShader);

@@ -16,11 +16,7 @@
 
 + (GLTexture*) textureWithImage:(UIImage*)image;
 
-
 - (void) bindToTextureUnit:(GLenum)textureUnit;
     // Bind this texture to the specified textureUnit;
-
-//- (void) bind;
-    // Binding will make the this texture the texture for the active texture unit
 
 @end

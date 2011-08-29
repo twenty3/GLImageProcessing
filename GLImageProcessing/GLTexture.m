@@ -47,7 +47,7 @@
                                                             colorSpace, kCGImageAlphaPremultipliedLast);
             // We are going ot use pre-multiplied data. Our later processing may need to account for this when manipulating RGB values
         
-        CGContextDrawImage(textureContext, CGRectMake(0.0, 0.0, (CGFloat)width, (CGFloat)width), image.CGImage);
+        CGContextDrawImage(textureContext, CGRectMake(0.0, 0.0, (CGFloat)width, (CGFloat)height), image.CGImage);
             // Draw the image into the bitmap context
         
         glGenTextures(1, &textureName_);
