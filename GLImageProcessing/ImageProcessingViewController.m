@@ -10,6 +10,7 @@
 
 #import "ImageProcessingViewController.h"
 #import "EAGLView.h"
+#import "GLTexture.h"
 
 // Attribute index.
 enum {
@@ -24,6 +25,7 @@ enum {
 }
 
 @property (nonatomic, retain) EAGLContext* context;
+@property (nonatomic, retain) GLTexture* sourceImage;
 
 - (void)drawFrame;
 
@@ -37,6 +39,7 @@ enum {
 @implementation ImageProcessingViewController
 
 @synthesize context = context_;
+@synthesize sourceImage = sourceImage_;
 
 #pragma mark - Lifecycle
 
@@ -76,6 +79,8 @@ enum {
     
     if ([self.context API] == kEAGLRenderingAPIOpenGLES2)
         [self loadShaders];
+    
+    self.sourceImage = [GLTexture textureWithImage:[UIImage imageNamed:@"source_image.jpg"]];
 }
 
 
