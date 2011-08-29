@@ -47,6 +47,11 @@
                                         [NSNumber numberWithBool:FALSE], kEAGLDrawablePropertyRetainedBacking,
                                         kEAGLColorFormatRGBA8, kEAGLDrawablePropertyColorFormat,
                                         nil];
+        
+        // If we are on a retina display, make sure we set the scale factor of our view so that our CAEAGLLayer is sized to match the display. This will allow us to draw at the higher resolution of the retina display with GL
+        
+        if ([[UIScreen mainScreen] scale] == 2.0)
+            self.contentScaleFactor = 2.0;
     }
     
     return self;
