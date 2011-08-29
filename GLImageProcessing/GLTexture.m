@@ -67,6 +67,7 @@
             // GL_CLAMP_TO_EDGE means that samples beyond the texture bounds will be replicated edge pixels
             // this mode is required to use textures that are not powers for two in size. 
         
+        CGColorSpaceRelease(colorSpace);
         CGContextRelease(textureContext);
         free(textureData);      
             // glTextImge2D has copied the pixel data over to the GL state, so we can release it safely
