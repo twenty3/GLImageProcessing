@@ -14,4 +14,6 @@
 
 @interface ImageProcessingViewController : UIViewController
 
+@property(nonatomic, retain) IBOutlet UISlider* slider;
+
 @end

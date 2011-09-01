@@ -49,10 +49,13 @@ static GLint uniforms[NUM_UNIFORMS];
 - (BOOL)linkProgram:(GLuint)prog;
 - (BOOL)validateProgram:(GLuint)prog;
 
+- (IBAction)sliderValueChanged:(id)sender;
+
 @end
 
 @implementation ImageProcessingViewController
 
+@synthesize slider = slider_;
 @synthesize context = context_;
 @synthesize sourceImage = sourceImage_;
 
@@ -72,6 +75,7 @@ static GLint uniforms[NUM_UNIFORMS];
     
     [context_ release];
     [sourceImage_ release];
+    [slider_ release];
     
     [super dealloc];
 }
@@ -115,7 +119,10 @@ static GLint uniforms[NUM_UNIFORMS];
     // Tear down context.
     if ([EAGLContext currentContext] == self.context)
         [EAGLContext setCurrentContext:nil];
+
 	self.context = nil;	
+    self.slider = nil;
+    self.sourceImage = nil;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -123,6 +130,13 @@ static GLint uniforms[NUM_UNIFORMS];
     [self drawFrame];
 }
 
+#pragma mark - Actions
+
+
+- (IBAction)sliderValueChanged:(id)sender
+{
+    [self drawFrame];
+}
 
 #pragma mark - Draw
 
@@ -168,7 +182,7 @@ static GLint uniforms[NUM_UNIFORMS];
     glUniform1i(uniforms[UNIFORM_SOURCE_TEXTURE], 0);
     
     // Set the amount (this will come from the slider shortly)
-    glUniform1f(uniforms[UNIFORM_AMOUNT_SCALAR], 1.2);
+    glUniform1f(uniforms[UNIFORM_AMOUNT_SCALAR], self.slider.value);
     
     // Validate program before drawing. This is a good check, but only really necessary in a debug build.
     // DEBUG macro must be defined in your debug configurations if that's not already the case.
