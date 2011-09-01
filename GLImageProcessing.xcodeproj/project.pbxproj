@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		012ABFED140B187B002A801F /* GLTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 012ABFEC140B187B002A801F /* GLTexture.m */; };
+		01549D10140BA9F9002A4C8E /* GrayscaleShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 01549D0F140BA9F9002A4C8E /* GrayscaleShader.fsh */; };
 		015E9AFD140B8EBA00DF7CB8 /* source_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 015E9AFC140B8EBA00DF7CB8 /* source_image.jpg */; };
 		0199F8FB14023C6A0038AA29 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0199F8FA14023C6A0038AA29 /* UIKit.framework */; };
 		0199F8FD14023C6A0038AA29 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0199F8FC14023C6A0038AA29 /* Foundation.framework */; };
@@ -28,6 +29,7 @@
 /* Begin PBXFileReference section */
 		012ABFEB140B187B002A801F /* GLTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLTexture.h; sourceTree = "<group>"; };
 		012ABFEC140B187B002A801F /* GLTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLTexture.m; sourceTree = "<group>"; };
+		01549D0F140BA9F9002A4C8E /* GrayscaleShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = GrayscaleShader.fsh; path = Shaders/GrayscaleShader.fsh; sourceTree = "<group>"; };
 		015E9AFC140B8EBA00DF7CB8 /* source_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = source_image.jpg; sourceTree = "<group>"; };
 		0199F8F614023C6A0038AA29 /* GLImageProcessing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GLImageProcessing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0199F8FA14023C6A0038AA29 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -162,6 +164,7 @@
 		0199F92514023D4A0038AA29 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				01549D0F140BA9F9002A4C8E /* GrayscaleShader.fsh */,
 				0199F91314023C6B0038AA29 /* Shader.fsh */,
 				0199F91514023C6B0038AA29 /* Shader.vsh */,
 			);
@@ -223,6 +226,7 @@
 				0199F91214023C6B0038AA29 /* MainWindow.xib in Resources */,
 				0199F91414023C6B0038AA29 /* Shader.fsh in Resources */,
 				0199F91614023C6B0038AA29 /* Shader.vsh in Resources */,
+				01549D10140BA9F9002A4C8E /* GrayscaleShader.fsh in Resources */,
 				0199F91F14023C6B0038AA29 /* ImageProcessingViewController.xib in Resources */,
 				015E9AFD140B8EBA00DF7CB8 /* source_image.jpg in Resources */,
 			);
