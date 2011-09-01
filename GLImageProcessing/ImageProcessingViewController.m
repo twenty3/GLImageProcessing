@@ -24,6 +24,7 @@ enum {
 // Uniforms
 enum {
     UNIFORM_SOURCE_TEXTURE,
+    UNIFORM_AMOUNT_SCALAR,
     NUM_UNIFORMS
 };
 
@@ -166,6 +167,9 @@ static GLint uniforms[NUM_UNIFORMS];
     [self.sourceImage bindToTextureUnit:GL_TEXTURE0];
     glUniform1i(uniforms[UNIFORM_SOURCE_TEXTURE], 0);
     
+    // Set the amount (this will come from the slider shortly)
+    glUniform1f(uniforms[UNIFORM_AMOUNT_SCALAR], 1.2);
+    
     // Validate program before drawing. This is a good check, but only really necessary in a debug build.
     // DEBUG macro must be defined in your debug configurations if that's not already the case.
 #if defined(DEBUG)
@@ -287,7 +291,7 @@ static GLint uniforms[NUM_UNIFORMS];
     }
     
     // Create and compile fragment shader.
-    fragShaderPathname = [[NSBundle mainBundle] pathForResource:@"SepiaShader" ofType:@"fsh"];
+    fragShaderPathname = [[NSBundle mainBundle] pathForResource:@"BrightnessShader" ofType:@"fsh"];
     if (![self compileShader:&fragShader type:GL_FRAGMENT_SHADER file:fragShaderPathname])
     {
         NSLog(@"Failed to compile fragment shader");
@@ -331,6 +335,7 @@ static GLint uniforms[NUM_UNIFORMS];
     
     // Get Uniform locations from the linked programs
     uniforms[UNIFORM_SOURCE_TEXTURE] = glGetUniformLocation(program, "sourceTexture");
+    uniforms[UNIFORM_AMOUNT_SCALAR] =  glGetUniformLocation(program, "amount");
 
     // Release vertex and fragment shaders.
     if (vertShader)
