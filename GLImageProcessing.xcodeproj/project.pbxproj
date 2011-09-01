@@ -26,6 +26,7 @@
 		0199F91F14023C6B0038AA29 /* ImageProcessingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0199F91D14023C6B0038AA29 /* ImageProcessingViewController.xib */; };
 		01BD310C140F6BBF00E2DC24 /* SepiaShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 01BD310B140F6BBF00E2DC24 /* SepiaShader.fsh */; };
 		01BD311A140F7E2D00E2DC24 /* BrightnessShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 01BD3119140F7E2D00E2DC24 /* BrightnessShader.fsh */; };
+		01BD3121140F8E9900E2DC24 /* SaturationShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 01BD3120140F8E9900E2DC24 /* SaturationShader.fsh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		0199F91E14023C6B0038AA29 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ImageProcessingViewController.xib; sourceTree = "<group>"; };
 		01BD310B140F6BBF00E2DC24 /* SepiaShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = SepiaShader.fsh; path = Shaders/SepiaShader.fsh; sourceTree = "<group>"; };
 		01BD3119140F7E2D00E2DC24 /* BrightnessShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = BrightnessShader.fsh; path = Shaders/BrightnessShader.fsh; sourceTree = "<group>"; };
+		01BD3120140F8E9900E2DC24 /* SaturationShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = SaturationShader.fsh; path = Shaders/SaturationShader.fsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 		0199F92514023D4A0038AA29 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				01BD3120140F8E9900E2DC24 /* SaturationShader.fsh */,
 				01BD3119140F7E2D00E2DC24 /* BrightnessShader.fsh */,
 				01BD310B140F6BBF00E2DC24 /* SepiaShader.fsh */,
 				01549D0F140BA9F9002A4C8E /* GrayscaleShader.fsh */,
@@ -235,6 +238,7 @@
 				01549D10140BA9F9002A4C8E /* GrayscaleShader.fsh in Resources */,
 				01BD310C140F6BBF00E2DC24 /* SepiaShader.fsh in Resources */,
 				01BD311A140F7E2D00E2DC24 /* BrightnessShader.fsh in Resources */,
+				01BD3121140F8E9900E2DC24 /* SaturationShader.fsh in Resources */,
 				0199F91F14023C6B0038AA29 /* ImageProcessingViewController.xib in Resources */,
 				015E9AFD140B8EBA00DF7CB8 /* source_image.jpg in Resources */,
 			);
