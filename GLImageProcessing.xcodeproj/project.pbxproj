@@ -10,6 +10,7 @@
 		012ABFED140B187B002A801F /* GLTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 012ABFEC140B187B002A801F /* GLTexture.m */; };
 		01549D10140BA9F9002A4C8E /* GrayscaleShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 01549D0F140BA9F9002A4C8E /* GrayscaleShader.fsh */; };
 		015E9AFD140B8EBA00DF7CB8 /* source_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 015E9AFC140B8EBA00DF7CB8 /* source_image.jpg */; };
+		01969B59141017540017DAB7 /* VignetteShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 01969B58141017540017DAB7 /* VignetteShader.fsh */; };
 		0199F8FB14023C6A0038AA29 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0199F8FA14023C6A0038AA29 /* UIKit.framework */; };
 		0199F8FD14023C6A0038AA29 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0199F8FC14023C6A0038AA29 /* Foundation.framework */; };
 		0199F8FF14023C6A0038AA29 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0199F8FE14023C6A0038AA29 /* CoreGraphics.framework */; };
@@ -35,6 +36,7 @@
 		012ABFEC140B187B002A801F /* GLTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLTexture.m; sourceTree = "<group>"; };
 		01549D0F140BA9F9002A4C8E /* GrayscaleShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = GrayscaleShader.fsh; path = Shaders/GrayscaleShader.fsh; sourceTree = "<group>"; };
 		015E9AFC140B8EBA00DF7CB8 /* source_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = source_image.jpg; sourceTree = "<group>"; };
+		01969B58141017540017DAB7 /* VignetteShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = VignetteShader.fsh; path = Shaders/VignetteShader.fsh; sourceTree = "<group>"; };
 		0199F8F614023C6A0038AA29 /* GLImageProcessing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GLImageProcessing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0199F8FA14023C6A0038AA29 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0199F8FC14023C6A0038AA29 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -172,6 +174,7 @@
 		0199F92514023D4A0038AA29 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				01969B58141017540017DAB7 /* VignetteShader.fsh */,
 				01BD3127140F92C500E2DC24 /* RippleShader.fsh */,
 				01BD3120140F8E9900E2DC24 /* SaturationShader.fsh */,
 				01BD3119140F7E2D00E2DC24 /* BrightnessShader.fsh */,
@@ -243,6 +246,7 @@
 				01BD311A140F7E2D00E2DC24 /* BrightnessShader.fsh in Resources */,
 				01BD3121140F8E9900E2DC24 /* SaturationShader.fsh in Resources */,
 				01BD3128140F92C500E2DC24 /* RippleShader.fsh in Resources */,
+				01969B59141017540017DAB7 /* VignetteShader.fsh in Resources */,
 				0199F91F14023C6B0038AA29 /* ImageProcessingViewController.xib in Resources */,
 				015E9AFD140B8EBA00DF7CB8 /* source_image.jpg in Resources */,
 			);
