@@ -45,7 +45,7 @@
         
         CGContextRef textureContext = CGBitmapContextCreate(textureData, width, height, 8, width * 4,
                                                             colorSpace, kCGImageAlphaPremultipliedLast);
-            // We are going ot use pre-multiplied data. Our later processing may need to account for this when manipulating RGB values
+            // We are going to use pre-multiplied data. Our later processing may need to account for this when manipulating RGB values
         
         CGContextDrawImage(textureContext, CGRectMake(0.0, 0.0, (CGFloat)width, (CGFloat)height), image.CGImage);
             // Draw the image into the bitmap context

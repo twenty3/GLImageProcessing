@@ -42,6 +42,8 @@ static GLint uniforms[NUM_UNIFORMS];
 @property (nonatomic, retain) EAGLContext* context;
 @property (nonatomic, retain) GLTexture* sourceImage;
 
+- (CGContextRef) newBitmapContextForSize:(CGSize)size;
+- (UIImage*)imageFromEAGLLayer;
 - (void)drawFrame;
 
 - (BOOL)loadShaders;
@@ -101,6 +103,9 @@ static GLint uniforms[NUM_UNIFORMS];
         [self loadShaders];
     
     self.sourceImage = [GLTexture textureWithImage:[UIImage imageNamed:@"source_image.jpg"]];
+    
+    UITapGestureRecognizer* tapRecognizer = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)] autorelease];
+    [self.view addGestureRecognizer:tapRecognizer];
 }
 
 
@@ -138,7 +143,60 @@ static GLint uniforms[NUM_UNIFORMS];
     [self drawFrame];
 }
 
+- (void)viewTapped:(id)sender
+{
+    UIImage* image = [self imageFromEAGLLayer];
+    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+}
+
+
+#pragma mark - Bitmaps
+
+- (CGContextRef) newBitmapContextForSize:(CGSize)size
+{
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+	CGBitmapInfo	bitmapInfo = kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big;
+	int				rowByteWidth = size.width * 4;
+	
+	CGContextRef context = CGBitmapContextCreate(NULL, size.width, size.height, 8, rowByteWidth, colorSpace, bitmapInfo);
+    CGColorSpaceRelease( colorSpace );
+    
+    return context;
+}
+
 #pragma mark - Draw
+
+- (UIImage*)imageFromEAGLLayer
+{
+    // grab the pixels from the framebuffer associated with our view's EAGLLayer and create a UIImage from the data.
+    // The assumption made here is that rendering to the layer has already occured from a previous call to drawFrame:
+    
+    // Create a Core Graphics bitmap contenxt for which we provide the storage.
+    
+    GLsizei width = self.view.layer.bounds.size.width * self.view.contentScaleFactor;
+    GLsizei height = self.view.layer.bounds.size.height * self.view.contentScaleFactor;    
+
+    CGContextRef context = [self newBitmapContextForSize:(CGSize){width, height}];
+	CGContextClearRect(context, (CGRect){0.0, 0.0, width, height});    
+    void* pixelData = CGBitmapContextGetData(context);
+    
+    //Then we will use glReadPixels to copy the rendered image from the GL server storage (GPU) over to our newly allocated bitmap storage.    
+    [(EAGLView *)self.view setFramebuffer];
+    glReadPixels(0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, pixelData);
+
+    //Finally we'll create an image from the bitmap context with the dupilcated pixels
+
+	CGImageRef contextImage = CGBitmapContextCreateImage(context);
+    CGContextRelease(context);
+    
+    // TO DO: THE IMAGE IS UPSIDE DOWN!
+        
+    UIImage* image = [[[UIImage alloc] initWithCGImage:contextImage] autorelease];
+    CGImageRelease(contextImage);
+    
+    return image;
+}
+
 
 - (void)drawFrame
 {
@@ -150,13 +208,13 @@ static GLint uniforms[NUM_UNIFORMS];
     static const GLfloat squareVertices[] =
     {
         -1.0f, -1.0f,
-         1.0f, -1.0f,
+        1.0f, -1.0f,
         -1.0f,  1.0f,
-         1.0f,  1.0f,
+        1.0f,  1.0f,
     };
     
     // Here we declare an texture coordinates that map the source texture to the quad defined above. We simply place each corner of the source image on a corner of the quad.
-    
+    // Note that since our texture was from a CGImage, it is 'upside' down from what we would expect. These texture coordinates map the top of the image to the bottom of the quad and the bottom of the image to the top of the quad defined above.  
     static const GLfloat textureCoordinates[] =
     {
         0.0f, 1.0f,
@@ -164,7 +222,7 @@ static GLint uniforms[NUM_UNIFORMS];
         0.0f, 0.0f,
         1.0f, 0.0f,
     };
-        
+    
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     
@@ -181,7 +239,7 @@ static GLint uniforms[NUM_UNIFORMS];
     [self.sourceImage bindToTextureUnit:GL_TEXTURE0];
     glUniform1i(uniforms[UNIFORM_SOURCE_TEXTURE], 0);
     
-    // Set the amount (this will come from the slider shortly)
+    // Set the amount
     glUniform1f(uniforms[UNIFORM_AMOUNT_SCALAR], self.slider.value);
     
     // Validate program before drawing. This is a good check, but only really necessary in a debug build.
@@ -200,7 +258,6 @@ static GLint uniforms[NUM_UNIFORMS];
     // This casues the OS to display the rasterized scene 
     [(EAGLView *)self.view presentFramebuffer];
 }
-
 
 #pragma mark - Shaders
 
