@@ -25,6 +25,7 @@ enum {
 enum {
     UNIFORM_SOURCE_TEXTURE,
     UNIFORM_AMOUNT_SCALAR,
+    UNIFORM_MVP_MATRIX,
     NUM_UNIFORMS
 };
 
@@ -44,7 +45,7 @@ static GLint uniforms[NUM_UNIFORMS];
 
 - (CGContextRef)newBitmapContextForSize:(CGSize)size;
 - (UIImage*)imageByRenderingViewAtSize:(CGSize)size;
-- (void)renderIntoCurrentGLContext;
+- (void)renderIntoCurrentGLContextWithTransform:(CATransform3D)transform;
 - (void)drawFrame;
 
 - (BOOL)loadShaders;
@@ -194,8 +195,9 @@ static GLint uniforms[NUM_UNIFORMS];
     // establish the viewport coordinates to match the size of the buffer;
     glViewport(0, 0, size.width, size.height);
     
-    // draw our image into the framebuffer
-    [self renderIntoCurrentGLContext];
+    // draw our image into the framebuffer using a transform that will invert the image by scaling the Y axis by -1.0
+    CATransform3D transform = CATransform3DMakeScale(1.0, -1.0, 1.0);
+    [self renderIntoCurrentGLContextWithTransform:transform];
     
     // Create a Core Graphics bitmap context 
     CGContextRef context = [self newBitmapContextForSize:size];
@@ -217,7 +219,7 @@ static GLint uniforms[NUM_UNIFORMS];
     return image;
 }
 
-- (void)renderIntoCurrentGLContext
+- (void)renderIntoCurrentGLContextWithTransform:(CATransform3D)transform
 {
     // Here we declare a set of vertices that define a square that is paralell to the viewing plane.
     // These are effectively normalized device viewing space coordinates because we are not manipulating the modelview or projection transformations from their defaults and we have set up the viewport to match the size of our view
@@ -257,6 +259,14 @@ static GLint uniforms[NUM_UNIFORMS];
     
     // Set the amount (this will come from the slider shortly)
     glUniform1f(uniforms[UNIFORM_AMOUNT_SCALAR], self.slider.value);
+
+    // Set the transform matrix        
+    GLfloat matrix[16] = { transform.m11, transform.m12, transform.m13, transform.m14,
+                           transform.m21, transform.m22, transform.m23, transform.m24,
+                           transform.m31, transform.m32, transform.m33, transform.m34,
+                           transform.m41, transform.m42, transform.m43, transform.m44 };
+    
+    glUniformMatrix4fv(UNIFORM_SOURCE_TEXTURE, 1, 0, matrix);
     
     // Validate program before drawing. This is a good check, but only really necessary in a debug build.
     // DEBUG macro must be defined in your debug configurations if that's not already the case.
@@ -278,8 +288,9 @@ static GLint uniforms[NUM_UNIFORMS];
     // This makes the context and framebuffer associated with our view current. GL State and drawing commands will be targeted to that context and render in that framebuffer
     [(EAGLView *)self.view setFramebuffer];
     
-    [self renderIntoCurrentGLContext];
-    
+    CATransform3D transform = CATransform3DIdentity;
+    [self renderIntoCurrentGLContextWithTransform:transform];
+        
     [(EAGLView *)self.view presentFramebuffer];
 }
 
@@ -431,6 +442,7 @@ static GLint uniforms[NUM_UNIFORMS];
     // Get Uniform locations from the linked programs
     uniforms[UNIFORM_SOURCE_TEXTURE] = glGetUniformLocation(program, "sourceTexture");
     uniforms[UNIFORM_AMOUNT_SCALAR] =  glGetUniformLocation(program, "amount");
+    uniforms[UNIFORM_MVP_MATRIX] = glGetUniformLocation(program, "mvpMatrix");
 
     // Release vertex and fragment shaders.
     if (vertShader)
