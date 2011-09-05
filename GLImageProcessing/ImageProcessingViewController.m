@@ -42,8 +42,9 @@ static GLint uniforms[NUM_UNIFORMS];
 @property (nonatomic, retain) EAGLContext* context;
 @property (nonatomic, retain) GLTexture* sourceImage;
 
-- (CGContextRef) newBitmapContextForSize:(CGSize)size;
-- (UIImage*)imageFromEAGLLayer;
+- (CGContextRef)newBitmapContextForSize:(CGSize)size;
+- (UIImage*)imageByRenderingViewAtSize:(CGSize)size;
+- (void)renderIntoCurrentGLContext;
 - (void)drawFrame;
 
 - (BOOL)loadShaders;
@@ -145,8 +146,14 @@ static GLint uniforms[NUM_UNIFORMS];
 
 - (void)viewTapped:(id)sender
 {
-    UIImage* image = [self imageFromEAGLLayer];
+    // We'll double the size of the veiw just to demonstrate how it works. On a Retina device this will result in scaling the content larger than the original 640 x 960 iamge
+    
+    GLsizei width = self.view.layer.bounds.size.width * self.view.contentScaleFactor * 2.0;
+    GLsizei height = self.view.layer.bounds.size.height * self.view.contentScaleFactor * 2.0;
+    UIImage* image = [self imageByRenderingViewAtSize:(CGSize){width, height}];
     UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+    UIAlertView* view = [[[UIAlertView alloc] initWithTitle:@"Image Saved" message:@"Processed image has been saved to the Camera Roll in the Photo Library" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] autorelease];
+    [view show];
 }
 
 
@@ -166,43 +173,52 @@ static GLint uniforms[NUM_UNIFORMS];
 
 #pragma mark - Draw
 
-- (UIImage*)imageFromEAGLLayer
+- (UIImage*)imageByRenderingViewAtSize:(CGSize)size;
 {
-    // grab the pixels from the framebuffer associated with our view's EAGLLayer and create a UIImage from the data.
-    // The assumption made here is that rendering to the layer has already occured from a previous call to drawFrame:
-    
-    // Create a Core Graphics bitmap contenxt for which we provide the storage.
-    
-    GLsizei width = self.view.layer.bounds.size.width * self.view.contentScaleFactor;
-    GLsizei height = self.view.layer.bounds.size.height * self.view.contentScaleFactor;    
+    // Explicitly make a new Framebuffer so there is control over the size of the final rendered image. If the source image is smaller than the destination framebuffer, scaling will occur, which could degrade image quality. This techinque is useful when the original image is larger than the screen size and you want to maintain that resolution. Note that the device HW limits the renderBuffer size, just like the maxium texture size. On latest generation iOS Devices the limit is 2048 x 2048 (4096 x 4096 for iPad 2). On older devices the limit is 1024 x 1024. 
 
-    CGContextRef context = [self newBitmapContextForSize:(CGSize){width, height}];
-	CGContextClearRect(context, (CGRect){0.0, 0.0, width, height});    
+    GLuint framebuffer;
+    glGenFramebuffers(1, &framebuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+    
+    GLuint colorRenderbuffer;
+    glGenRenderbuffers(1, &colorRenderbuffer);
+    glBindRenderbuffer(GL_RENDERBUFFER, colorRenderbuffer);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA8_OES, size.width, size.height);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, colorRenderbuffer);
+    
+    GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+    if(status != GL_FRAMEBUFFER_COMPLETE)
+        NSLog(@"failed to make complete framebuffer object %x", status);
+    
+    // establish the viewport coordinates to match the size of the buffer;
+    glViewport(0, 0, size.width, size.height);
+    
+    // draw our image into the framebuffer
+    [self renderIntoCurrentGLContext];
+    
+    // Create a Core Graphics bitmap context 
+    CGContextRef context = [self newBitmapContextForSize:size];
+	CGContextClearRect(context, (CGRect){0.0, 0.0, size.width, size.height});    
+    
+    // copy the rendered pixels from the GL Framebuffer to the Core Graphics bitmap
     void* pixelData = CGBitmapContextGetData(context);
+    glReadPixels(0, 0, size.width, size.height, GL_RGBA, GL_UNSIGNED_BYTE, pixelData);
     
-    //Then we will use glReadPixels to copy the rendered image from the GL server storage (GPU) over to our newly allocated bitmap storage.    
-    [(EAGLView *)self.view setFramebuffer];
-    glReadPixels(0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, pixelData);
-
-    //Finally we'll create an image from the bitmap context with the dupilcated pixels
-
 	CGImageRef contextImage = CGBitmapContextCreateImage(context);
     CGContextRelease(context);
     
-    // TO DO: THE IMAGE IS UPSIDE DOWN!
-        
+    glDeleteFramebuffers(1, &framebuffer);
+    glDeleteRenderbuffers(1, &colorRenderbuffer);
+    
     UIImage* image = [[[UIImage alloc] initWithCGImage:contextImage] autorelease];
     CGImageRelease(contextImage);
     
     return image;
 }
 
-
-- (void)drawFrame
+- (void)renderIntoCurrentGLContext
 {
-    // This makes the context and framebuffer associated with our view current. GL State and drawing commands will be targeted to that context and render in that framebuffer
-    [(EAGLView *)self.view setFramebuffer];
-    
     // Here we declare a set of vertices that define a square that is paralell to the viewing plane.
     // These are effectively normalized device viewing space coordinates because we are not manipulating the modelview or projection transformations from their defaults and we have set up the viewport to match the size of our view
     static const GLfloat squareVertices[] =
@@ -214,7 +230,7 @@ static GLint uniforms[NUM_UNIFORMS];
     };
     
     // Here we declare an texture coordinates that map the source texture to the quad defined above. We simply place each corner of the source image on a corner of the quad.
-    // Note that since our texture was from a CGImage, it is 'upside' down from what we would expect. These texture coordinates map the top of the image to the bottom of the quad and the bottom of the image to the top of the quad defined above.  
+    
     static const GLfloat textureCoordinates[] =
     {
         0.0f, 1.0f,
@@ -239,7 +255,7 @@ static GLint uniforms[NUM_UNIFORMS];
     [self.sourceImage bindToTextureUnit:GL_TEXTURE0];
     glUniform1i(uniforms[UNIFORM_SOURCE_TEXTURE], 0);
     
-    // Set the amount
+    // Set the amount (this will come from the slider shortly)
     glUniform1f(uniforms[UNIFORM_AMOUNT_SCALAR], self.slider.value);
     
     // Validate program before drawing. This is a good check, but only really necessary in a debug build.
@@ -255,7 +271,15 @@ static GLint uniforms[NUM_UNIFORMS];
     // This causes GL to draw our scene with the current state- including the vertices and texture coordinate attributes we have supplied to the state above. The drawing is raterized into the current framebuffer
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     
-    // This casues the OS to display the rasterized scene 
+}
+
+- (void)drawFrame
+{
+    // This makes the context and framebuffer associated with our view current. GL State and drawing commands will be targeted to that context and render in that framebuffer
+    [(EAGLView *)self.view setFramebuffer];
+    
+    [self renderIntoCurrentGLContext];
+    
     [(EAGLView *)self.view presentFramebuffer];
 }
 
