@@ -266,7 +266,7 @@ static GLint uniforms[NUM_UNIFORMS];
                            transform.m31, transform.m32, transform.m33, transform.m34,
                            transform.m41, transform.m42, transform.m43, transform.m44 };
     
-    glUniformMatrix4fv(UNIFORM_SOURCE_TEXTURE, 1, 0, matrix);
+    glUniformMatrix4fv(UNIFORM_MVP_MATRIX, 1, 0, matrix);
     
     // Validate program before drawing. This is a good check, but only really necessary in a debug build.
     // DEBUG macro must be defined in your debug configurations if that's not already the case.
