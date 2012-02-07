@@ -6,3 +6,6 @@ project.xcworkspace
 
 #ignore xcuserdata
 xcuserdata
+
+#ignore checkpoints folder
+Checkpoints
